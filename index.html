@@ -121,12 +121,16 @@
   <!-- HERO -->
   <section class="leather">
     <div class="container hero">
-      <video class="bgvid"
-             autoplay muted playsinline loop preload="auto"
-             poster="./assets/water.jpg"
-             onerror="this.style.display='none'">
-        <source src="./assets/water.mp4" type="video/mp4" />
-      </video>
+      <video id="heroVid" class="bgvid"
+       autoplay
+       muted
+       playsinline
+       loop
+       preload="auto"
+       controls
+       poster="./assets/water.jpg">
+  <source src="./assets/water.mp4" type="video/mp4">
+     </video>
       <div class="motion"></div>
       <div class="sheen"></div>
       <div class="rays"></div>
