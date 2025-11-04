@@ -12,8 +12,8 @@
   <style>
     :root{
       --bg:#0b0b0c;   /* matte black */
-      --ink:#ede7dc;  /* ivory */
-      --muted:#c9c1b3;/* fog */
+      --ink:#ede7dc; /* ivory */
+      --muted:#c9c1b3; /* fog */
       --line:#202123; /* hairline */
       --espresso:#6b4a33; /* warm accent */
     }
@@ -68,9 +68,8 @@
                   linear-gradient(180deg,#0c0c0e,#0b0b0c);
       min-height:40vh;
     }
-    @supports not (aspect-ratio:1/1){
-      .hero-bg{height:70vh}
-    }
+    @supports not (aspect-ratio:1/1){ .hero-bg{height:70vh} }
+
     /* Mobile: switch to Instagram-friendly 4:5 crop (same asset you’ll post) */
     @media (max-width:900px){
       .hero-wrap{padding:4vh 0}
@@ -81,6 +80,7 @@
         background-position:center 45%;
       }
     }
+
     /* Instagram in-app browser: force 4:5 */
     body.ig .hero-bg{
       width:92vw;
@@ -110,8 +110,8 @@
     .btn:hover{filter:brightness(1.05)}
 
     /* Stories */
-    .stories{border-top:1px solid var(--line); background:linear-gradient(180deg,#0e0e10,#0b0b0c);}
-    .grid{width:min(1100px,92vw); margin:0 auto; padding:7vh 0; display:grid; gap:14px; grid-template-columns:repeat(3,1fr);}
+    .stories{border-top:1px solid var(--line); background:linear-gradient(180deg,#0e0e10,#0b0b0c);}    
+    .grid{width:min(1100px,92vw); margin:0 auto; padding:7vh 0; display:grid; gap:14px; grid-template-columns:repeat(3,1fr);}    
     .card{
       border:1px solid var(--line); border-radius:18px; padding:18px;
       background:linear-gradient(180deg,#141416,#0f0f12); box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);
