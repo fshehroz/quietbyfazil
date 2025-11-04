@@ -34,7 +34,19 @@
     .cta{display:inline-flex; gap:.6rem; align-items:center; padding:10px 16px; border-radius:999px; border:1px solid var(--line); color:var(--ink); text-decoration:none; font-size:14px}
     .cta:hover{border-color:#3a3a40}
 
-    .hero{position:relative; text-align:center; padding:14vh 0 12vh} .hero .bgvid{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.18; filter:grayscale(100%) contrast(110%);} .hero .motion{position:absolute; inset:-10%; pointer-events:none; background: radial-gradient(40% 20% at 20% 10%, rgba(255,255,255,.05), transparent 60%), radial-gradient(35% 20% at 80% 90%, rgba(255,255,255,.04), transparent 60%); animation: drift 22s ease-in-out infinite alternate;} .hero .sheen{position:absolute; inset:-20%; pointer-events:none; background: linear-gradient(115deg, transparent 45%, rgba(255,255,255,.04) 50%, transparent 55%); transform:translateX(-30%); animation: sweep 28s linear infinite;} @keyframes drift{to{transform:translate3d(0,6%,0)}} @keyframes sweep{0%{transform:translateX(-40%)}100%{transform:translateX(40%)}}
+    .hero{position:relative; text-align:center; padding:14vh 0 12vh}
+    .hero .bgvid{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.28; filter:grayscale(0%) contrast(110%) saturate(105%);} /* water wants color */
+    .hero .motion{position:absolute; inset:-10%; pointer-events:none; background: radial-gradient(40% 20% at 20% 10%, rgba(255,255,255,.05), transparent 60%), radial-gradient(35% 20% at 80% 90%, rgba(255,255,255,.04), transparent 60%); animation: drift 22s ease-in-out infinite alternate}
+    .hero .sheen{position:absolute; inset:-20%; pointer-events:none; background: linear-gradient(115deg, transparent 45%, rgba(255,255,255,.05) 50%, transparent 55%); transform:translateX(-30%); animation: sweep 28s linear infinite}
+    .hero .rays{position:absolute; inset:-10%; pointer-events:none; opacity:.14; background: repeating-conic-gradient(from 0deg, rgba(255,255,255,.06) 0 4deg, transparent 4deg 9deg); filter:blur(2px); animation: spin 90s linear infinite}
+    @keyframes drift{to{transform:translate3d(0,6%,0)}}
+    @keyframes sweep{0%{transform:translateX(-40%)}100%{transform:translateX(40%)}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    @media (prefers-reduced-motion: reduce){
+      .hero .motion,.hero .sheen,.hero .rays{animation:none}
+      .hero .bgvid{opacity:.22}
+    }100%{transform:translateX(40%)}}
     .logo{width:min(420px,60vw); margin:0 auto 18px; opacity:.95; display:block}
     .headline{font-family:"Cormorant Garamond", serif; font-weight:500; font-size:clamp(44px,8vw,110px); line-height:1.02; letter-spacing:.005em; margin:.4rem auto 1rem; text-shadow:0 1px 0 rgba(0,0,0,.25)}
     .sub{max-width:720px; margin:0 auto 26px; color:var(--muted); font-size:clamp(16px,2vw,18px); text-wrap:balance}
@@ -92,11 +104,12 @@
   <section class="leather">
     <div class="container hero">
       <!-- Optional ambient video: place assets/hero.mp4 to enable -->
-      <video class="bgvid" autoplay muted loop playsinline onerror="this.style.display='none'">
-        <source src="./assets/hero.mp4" type="video/mp4" />
+      <video class="bgvid" autoplay muted loop playsinline poster="./assets/water.jpg" onerror="this.style.display='none'">
+        <source src="./assets/water.mp4" type="video/mp4" />
       </video>
       <div class="motion"></div>
       <div class="sheen"></div>
+      <div class="rays"></div>
       <!-- Replace src with ./assets/quiet-logo.png after you upload it; if you skip it, the headline shows alone. -->
       <img class="logo" src="./assets/quiet-logo.png" alt="Quiet by Fazil logo" onerror="this.style.display='none'"/>
       <h1 class="headline">Luxury isn’t loud.</h1>
