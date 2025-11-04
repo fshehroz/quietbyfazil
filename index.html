@@ -67,6 +67,10 @@
       aspect-ratio: 21 / 9; /* prevents CLS, keeps proportions */
       position:relative;
       background:linear-gradient(180deg,#0c0c0e,#0b0b0c);
+      /* Fallback background if <img> fails or paths differ */
+      background-image: url('./assets/hero-wide.jpg');
+      background-size: cover; background-position: center;
+      min-height: 40vh; /* extra safety for browsers without aspect-ratio */
     }
     /* The actual image fills without distortion */
     .hero-card img{
@@ -77,6 +81,9 @@
     /* Mobile: switch to portrait crop automatically */
     @media (max-width: 900px){
       .hero-wrap{padding:4vh 0}
+      .hero-card{aspect-ratio: 4 / 5; width:92vw; background-image: url('./assets/hero-tall.jpg');}
+      .hero-card img{object-position:center 45%} /* bias a touch upward for faces */
+    }
       .hero-card{aspect-ratio: 4 / 5; width:92vw}
       .hero-card img{object-position:center 45%} /* bias a touch upward for faces */
     }
@@ -133,9 +140,10 @@
   <section class="hero-wrap">
     <figure class="hero-card" role="img" aria-label="Quiet by Fazil — a serene storymaking space in Adelaide">
       <!--
-        Provide BOTH crops for best result:
+        Provide crops for best result:
         - /assets/hero-wide.(webp|jpg)  — 21:9 or 16:9 composition for desktop
         - /assets/hero-tall.(webp|jpg)  — 4:5 composition for mobile (centered subject)
+        If you only have one image, place it as /assets/hero.jpg and we'll use that as fallback.
       -->
       <picture>
         <!-- Mobile first: use the tall crop on small screens -->
@@ -144,8 +152,8 @@
         <!-- Desktop/wide: use the wide cinematic crop -->
         <source srcset="./assets/hero-wide.webp" type="image/webp" media="(min-width: 901px)">
         <source srcset="./assets/hero-wide.jpg" media="(min-width: 901px)">
-        <!-- Fallback: if none matched, load wide jpg -->
-        <img src="./assets/hero-wide.jpg" alt="Quiet by Fazil — a serene storymaking space in Adelaide" loading="eager" decoding="async" />
+        <!-- Universal single-image fallback -->
+        <img src="./assets/hero.jpg" alt="Quiet by Fazil — a serene storymaking space in Adelaide" loading="eager" decoding="async" onerror="this.onerror=null; this.src='./assets/hero-wide.jpg'" />
       </picture>
     </figure>
   </section>
