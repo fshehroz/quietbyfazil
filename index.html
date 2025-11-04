@@ -32,7 +32,7 @@
       border-bottom:1px solid var(--line);
     }
     .container{width:min(1100px,92vw); margin:0 auto}
-    nav{display:flex; align-items:center; justify-content:space-between; padding:12px 0}
+    nav{display:flex; align-items:center; justify-content:space-between; padding:calc(12px + env(safe-area-inset-top,0)) 0 12px 0}
     .wordmark{
       display:flex; gap:.5rem; align-items:baseline;
       font-family:"Cormorant Garamond",serif; letter-spacing:.06em; font-size:22px;
@@ -52,21 +52,33 @@
     }
     .cta:hover{filter:brightness(1.06)}
 
-    /* HERO — centered “art card”, no overlays */
+    /* HERO — responsive art card that auto-adjusts web vs mobile */
     .hero-wrap{
       background:#0b0b0c; border-bottom:1px solid var(--line);
       display:flex; justify-content:center; align-items:center;
       padding:6vh 0;
     }
-    .hero-bg{
-      width:85%;
-      height:70vh;
-      border-radius:22px;
-      overflow:hidden;
+    /* Card bounds so image never "stretches"; aspect ratio swaps by breakpoint */
+    .hero-card{
+      width:min(1200px,92vw);
+      border-radius:22px; overflow:hidden;
       box-shadow:0 20px 60px rgba(0,0,0,.45);
-      background:
-        url("./assets/hero.jpg") center/cover no-repeat,
-        linear-gradient(180deg,#0c0c0e,#0b0b0c);
+      /* Desktop/Wide: cinematic banner */
+      aspect-ratio: 21 / 9; /* prevents CLS, keeps proportions */
+      position:relative;
+      background:linear-gradient(180deg,#0c0c0e,#0b0b0c);
+    }
+    /* The actual image fills without distortion */
+    .hero-card img{
+      position:absolute; inset:0;
+      width:100%; height:100%; object-fit:cover; object-position:center; /* no squeeze */
+      display:block; filter:saturate(96%) contrast(102%);
+    }
+    /* Mobile: switch to portrait crop automatically */
+    @media (max-width: 900px){
+      .hero-wrap{padding:4vh 0}
+      .hero-card{aspect-ratio: 4 / 5; width:92vw}
+      .hero-card img{object-position:center 45%} /* bias a touch upward for faces */
     }
 
     /* Identity */
@@ -89,8 +101,8 @@
     .btn:hover{filter:brightness(1.05)}
 
     /* Stories (quiet, matte cards) */
-    .stories{border-top:1px solid var(--line); background:linear-gradient(180deg,#0e0e10,#0b0b0c);}
-    .grid{width:min(1100px,92vw); margin:0 auto; padding:7vh 0; display:grid; gap:14px; grid-template-columns:repeat(3,1fr);}
+    .stories{border-top:1px solid var(--line); background:linear-gradient(180deg,#0e0e10,#0b0b0c);}    
+    .grid{width:min(1100px,92vw); margin:0 auto; padding:7vh 0; display:grid; gap:14px; grid-template-columns:repeat(3,1fr);}    
     .card{
       border:1px solid var(--line); border-radius:18px; padding:18px;
       background:linear-gradient(180deg,#141416,#0f0f12); box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);
@@ -117,10 +129,25 @@
     </div>
   </header>
 
-  <!-- Hero (clean image) -->
+  <!-- Hero (clean image, auto-adjust desktop vs mobile via <picture> + CSS aspect-ratio) -->
   <section class="hero-wrap">
-    <!-- Put your image at /assets/hero.jpg -->
-    <div class="hero-bg" role="img" aria-label="Quiet by Fazil — a serene storymaking space in Adelaide"></div>
+    <figure class="hero-card" role="img" aria-label="Quiet by Fazil — a serene storymaking space in Adelaide">
+      <!--
+        Provide BOTH crops for best result:
+        - /assets/hero-wide.(webp|jpg)  — 21:9 or 16:9 composition for desktop
+        - /assets/hero-tall.(webp|jpg)  — 4:5 composition for mobile (centered subject)
+      -->
+      <picture>
+        <!-- Mobile first: use the tall crop on small screens -->
+        <source srcset="./assets/hero-tall.webp" type="image/webp" media="(max-width: 900px)">
+        <source srcset="./assets/hero-tall.jpg" media="(max-width: 900px)">
+        <!-- Desktop/wide: use the wide cinematic crop -->
+        <source srcset="./assets/hero-wide.webp" type="image/webp" media="(min-width: 901px)">
+        <source srcset="./assets/hero-wide.jpg" media="(min-width: 901px)">
+        <!-- Fallback: if none matched, load wide jpg -->
+        <img src="./assets/hero-wide.jpg" alt="Quiet by Fazil — a serene storymaking space in Adelaide" loading="eager" decoding="async" />
+      </picture>
+    </figure>
   </section>
 
   <!-- Identity -->
@@ -171,6 +198,8 @@
       </div>
     </div>
   </footer>
-  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
