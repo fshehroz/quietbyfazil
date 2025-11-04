@@ -25,7 +25,7 @@
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Top bar sits ABOVE the image (not overlayed) */
+    /* Top bar */
     header{
       position:sticky; top:0; z-index:10;
       background:#0b0b0cf2; backdrop-filter:blur(8px) saturate(120%);
@@ -52,18 +52,24 @@
     }
     .cta:hover{filter:brightness(1.06)}
 
-    /* HERO IMAGE ONLY — no text, no overlays */
-    .hero-wrap{border-bottom:1px solid var(--line); background:#0b0b0c;}
-    .hero{
-      width:100%; height:100svh; /* full screen height, mobile-safe */
-      display:block; object-fit:cover; object-position:center;
-      background:#0b0b0c;
-      /* Prevent any accidental overlays */
-      outline:none; border:none; box-shadow:none;
-      user-select:none; -webkit-user-drag:none;
+    /* HERO — centered “art card”, no overlays */
+    .hero-wrap{
+      background:#0b0b0c; border-bottom:1px solid var(--line);
+      display:flex; justify-content:center; align-items:center;
+      padding:6vh 0;
+    }
+    .hero-bg{
+      width:85%;
+      height:70vh;
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,.45);
+      background:
+        url("./assets/hero.jpg") center/cover no-repeat,
+        linear-gradient(180deg,#0c0c0e,#0b0b0c);
     }
 
-    /* Identity block BELOW the image */
+    /* Identity */
     .identity{
       padding:7vh 0; text-align:center;
       background:linear-gradient(180deg,#0e0e10,#0b0b0c);
@@ -82,13 +88,26 @@
     }
     .btn:hover{filter:brightness(1.05)}
 
+    /* Stories (quiet, matte cards) */
+    .stories{border-top:1px solid var(--line); background:linear-gradient(180deg,#0e0e10,#0b0b0c);}
+    .grid{width:min(1100px,92vw); margin:0 auto; padding:7vh 0; display:grid; gap:14px; grid-template-columns:repeat(3,1fr);}
+    .card{
+      border:1px solid var(--line); border-radius:18px; padding:18px;
+      background:linear-gradient(180deg,#141416,#0f0f12); box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+    .card h3{margin:0 0 6px; font-family:"Cormorant Garamond", serif; font-weight:500; letter-spacing:.02em; font-size:20px}
+    .card p{margin:0; color:var(--muted); font-size:14px; line-height:1.55}
+    .tag{display:inline-block; margin-top:10px; font-size:12px; color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:6px 10px; background:#111113}
+    @media (max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+    @media (max-width:560px){.grid{grid-template-columns:1fr}}
+
     footer{border-top:1px solid var(--line); padding:26px 0; color:var(--muted)}
     .foot{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap}
     @media (max-width:560px){ .btn{padding:11px 16px} }
   </style>
 </head>
 <body>
-  <!-- Top bar (not on top of image) -->
+  <!-- Top bar -->
   <header>
     <div class="container">
       <nav>
@@ -98,13 +117,13 @@
     </div>
   </header>
 
-  <!-- Full-bleed image only -->
+  <!-- Hero (clean image) -->
   <section class="hero-wrap">
     <!-- Put your image at /assets/hero.jpg -->
-    <img class="hero" src="./assets/hero.jpg" alt="Quiet by Fazil — a serene storymaking space in Adelaide" />
+    <div class="hero-bg" role="img" aria-label="Quiet by Fazil — a serene storymaking space in Adelaide"></div>
   </section>
 
-  <!-- Identity (below image, on solid background) -->
+  <!-- Identity -->
   <section class="identity">
     <div class="container">
       <h1 class="tagline">Luxury isn’t loud.</h1>
@@ -113,6 +132,32 @@
         <a class="btn" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Request an Invitation</a>
         <a class="btn" href="mailto:quiet@quietbyfazil.com">Email</a>
       </div>
+    </div>
+  </section>
+
+  <!-- Stories (replace the three cards with your real testimonials) -->
+  <section class="stories" aria-label="Client stories">
+    <div class="grid">
+      <article class="card">
+        <h3>“I finally recognised myself.”</h3>
+        <p>R, a founder, arrived tense. We slowed everything down — window light, a warm table, silence. When he saw the final portrait, he said it felt like “coming back home.”</p>
+        <span class="tag">Adelaide · Café window light</span>
+      </article>
+
+      <article class="card">
+        <h3>“Quiet made me powerful.”</h3>
+        <p>M wanted something dignified — not staged. With minimal direction and soft shadows, her posture changed. She left saying, “This is how I want to be remembered.”</p>
+        <span class="tag">North Terrace · Architectural shade</span>
+      </article>
+
+      <article class="card">
+        <h3>“A memory our son can feel.”</h3>
+        <p>Two parents asked for presence, not poses. We crafted a gentle session at golden hour. The image now sits by their entryway — a reminder to slow down.</p>
+        <span class="tag">River Torrens · Golden hour</span>
+      </article>
+    </div>
+    <div style="text-align:center; padding:0 0 7vh">
+      <a class="btn" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Book via Instagram DM</a>
     </div>
   </section>
 
