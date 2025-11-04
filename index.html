@@ -3,350 +3,173 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quiet by Fazil — Luxury Through Stillness</title>
-  <meta name="description" content="Quiet by Fazil — a luxury portrait experience defined by cinematic calm, grounded power, and elegant stillness. Adelaide — by invitation." />
+  <title>Quiet by Fazil — A Luxury Portrait Invitation (Adelaide)</title>
+  <meta name="description" content="Quiet by Fazil — a serene, invitation-only portrait experience in Adelaide. Cinematic calm. Grounded power. Elegant stillness. Book via Instagram." />
+  <meta name="theme-color" content="#0b0b0c" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#0b0b0c;     /* deep matte */
-      --ink:#ede7dc;    /* ivory */
-      --muted:#c9c1b3;  /* fog */
-      --espresso:#6b4a33;
-      --line:#212123;   /* hairline */
+      --bg:#0b0b0c;         /* matte black */
+      --ink:#ede7dc;        /* ivory */
+      --muted:#c9c1b3;      /* fog */
+      --espresso:#6b4a33;   /* warm underline accent */
+      --line:#1f2022;       /* hairline */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0; background:var(--bg); color:var(--ink); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
 
-    /* Leather backdrop with subtle grain (falls back if leather.jpg is missing) */
-    .leather{
-      position:relative; min-height:100vh; display:grid; place-items:center; overflow:hidden;
+    /* Layout */
+    .container{width:min(1000px,92vw); margin:0 auto}
+    header{
+      position:sticky; top:0; z-index:10;
       border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(11,11,12,.85), rgba(11,11,12,.55) 60%, rgba(11,11,12,0));
+      backdrop-filter: blur(8px) saturate(120%);
+    }
+    nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .wordmark{
+      display:flex; align-items:baseline; gap:.5rem;
+      font-family:"Cormorant Garamond", serif; letter-spacing:.06em; font-weight:400; font-size:22px;
+    }
+    .wordmark .quiet{position:relative}
+    .wordmark .quiet:after{
+      content:""; position:absolute; left:.14em; right:-.12em; bottom:-.22em; height:2px;
+      background:linear-gradient(90deg, transparent 0 6%, var(--espresso) 20% 80%, transparent 94%);
+      opacity:.55;
+    }
+    .cta{
+      display:inline-flex; align-items:center; gap:.6rem;
+      padding:10px 16px; border-radius:999px;
+      border:1px solid var(--line); color:var(--ink); text-decoration:none; font-size:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(44,38,34,.16));
+    }
+    .cta:hover{filter:brightness(1.06)}
+    .rule{height:1px; background:linear-gradient(90deg, transparent, #262629, transparent)}
+
+    /* Hero */
+    .hero{
+      position:relative; overflow:hidden; border-bottom:1px solid var(--line);
       background:
-        radial-gradient(1600px 900px at 60% -10%, rgba(255,255,255,.04), rgba(0,0,0,0) 60%),
-        radial-gradient(1200px 800px at -20% 110%, rgba(255,255,255,.04), rgba(0,0,0,0) 60%),
-        url('./assets/leather.jpg') center/cover no-repeat,
+        url('./assets/hero.jpg') center/cover no-repeat,
         repeating-linear-gradient(25deg, rgba(255,255,255,.02) 0 2px, rgba(0,0,0,0) 2px 7px),
         linear-gradient(180deg,#0c0c0e,#0b0b0c);
     }
-    .leather:after{content:""; position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 180px 80px rgba(0,0,0,.65)}
-
-    header{position:sticky; top:0; z-index:10; backdrop-filter:saturate(120%) blur(8px);
-      background:linear-gradient(180deg, rgba(11,11,12,.88), rgba(11,11,12,.55) 60%, rgba(11,11,12,0));
-      border-bottom:1px solid var(--line)}
-    .container{width:min(1100px,92vw); margin:0 auto}
-    nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0}
-    .wordmark{display:flex; align-items:baseline; gap:.45rem; font-family:"Cormorant Garamond", serif; letter-spacing:.06em; font-weight:400; font-size:22px}
-    .wordmark .quiet{position:relative;}
-    .wordmark .quiet:after{content:""; position:absolute; left:.12em; right:-.1em; bottom:-.25em; height:2px; background:linear-gradient(90deg, transparent 0 6%, var(--espresso) 20% 80%, transparent 94%); opacity:.5}
-    .cta{display:inline-flex; gap:.6rem; align-items:center; padding:10px 16px; border-radius:999px; border:1px solid var(--line); color:var(--ink); text-decoration:none; font-size:14px}
-    .cta:hover{border-color:#3a3a40}
-
-    /* HERO + video */
-    .hero{ position:relative; text-align:center; padding:14vh 0 12vh; }
-    .bgvid{
-      position:absolute; inset:0; width:100%; height:100%;
-      object-fit:cover; z-index:0; opacity:.28;
-      filter:contrast(110%) saturate(105%);
+    .hero:after{ /* subtle vignette */
+      content:""; position:absolute; inset:0; pointer-events:none;
+      box-shadow:inset 0 0 180px 80px rgba(0,0,0,.65);
     }
-    .hero > :not(.bgvid){ position:relative; z-index:1; } /* text & overlays above video */
+    .hero-inner{ position:relative; text-align:center; padding:18vh 0 16vh; }
 
-    /* Ambient glow layers */
-    .motion{position:absolute; inset:-10%; pointer-events:none; background:
-      radial-gradient(40% 20% at 20% 10%, rgba(255,255,255,.05), transparent 60%),
-      radial-gradient(35% 20% at 80% 90%, rgba(255,255,255,.04), transparent 60%);
-      animation: drift 22s ease-in-out infinite alternate}
-    .sheen{position:absolute; inset:-20%; pointer-events:none; background:
-      linear-gradient(115deg, transparent 45%, rgba(255,255,255,.05) 50%, transparent 55%);
-      transform:translateX(-30%); animation: sweep 28s linear infinite}
-    .rays{position:absolute; inset:-10%; pointer-events:none; opacity:.14;
-      background: repeating-conic-gradient(from 0deg, rgba(255,255,255,.06) 0 4deg, transparent 4deg 9deg);
-      filter:blur(2px); animation: spin 90s linear infinite}
-    @keyframes drift{to{transform:translate3d(0,6%,0)}}
-    @keyframes sweep{0%{transform:translateX(-40%)}100%{transform:translateX(40%)}}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    @media (prefers-reduced-motion: reduce){
-      .motion,.sheen,.rays{animation:none}
-      .bgvid{opacity:.22}
+    .kicker{
+      letter-spacing:.28em; text-transform:uppercase; color:var(--muted);
+      font-size:12px; margin-bottom:12px;
     }
-
-    .logo{width:min(420px,60vw); margin:0 auto 18px; opacity:.95; display:block}
-    .headline{font-family:"Cormorant Garamond", serif; font-weight:500; font-size:clamp(44px,8vw,110px); line-height:1.02; letter-spacing:.005em; margin:.4rem auto 1rem; text-shadow:0 1px 0 rgba(0,0,0,.25)}
-    .sub{max-width:720px; margin:0 auto 26px; color:var(--muted); font-size:clamp(16px,2vw,18px); text-wrap:balance}
-
+    .headline{
+      font-family:"Cormorant Garamond", serif;
+      font-weight:500;
+      font-size:clamp(44px,8vw,110px);
+      line-height:1.02; letter-spacing:.005em; margin:.2rem auto .8rem;
+      text-shadow:0 1px 0 rgba(0,0,0,.25);
+      max-width:14ch;
+    }
+    .sub{
+      max-width:720px; margin:0 auto 22px; color:var(--muted);
+      font-size:clamp(16px,2vw,18px); text-wrap:balance;
+    }
     .buttons{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
-    .btn{padding:12px 18px; border-radius:999px; border:1px solid var(--line); text-decoration:none; color:var(--ink); font-size:14px; background:linear-gradient(180deg, rgba(237,231,220,.06), rgba(44,38,34,.18));}
-    .btn:hover{filter:brightness(1.05)}
-    .micro{font-size:12px; color:var(--muted)}
+    .btn{
+      padding:12px 18px; border-radius:999px; border:1px solid var(--line);
+      text-decoration:none; color:var(--ink); font-size:14px;
+      background:linear-gradient(180deg, rgba(237,231,220,.06), rgba(44,38,34,.18));
+    }
+    .btn:hover{filter:brightness(1.06)}
+    .micro{font-size:12px; color:var(--muted); margin-top:10px}
 
-    .rule{height:1px; background:linear-gradient(90deg, transparent, #262629, transparent)}
+    /* Invitation card */
+    .invite{
+      border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,#0e0e10,#0b0b0c);
+    }
+    .card{
+      margin:0 auto; padding:9vh 6vw; text-align:center;
+      border:1px solid var(--line); border-radius:20px;
+      background:linear-gradient(180deg,#131316,#0f0f12);
+      max-width:860px;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+    .lead{
+      font-family:"Cormorant Garamond", serif; font-weight:500;
+      font-size:clamp(24px,3vw,34px); letter-spacing:.02em; margin:0 0 8px;
+    }
+    .note{color:var(--muted); margin:0 0 18px; font-size:15px}
 
-    /* Story lines */
-    .story{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:linear-gradient(180deg,#0d0d0f,#0b0b0c)}
-    .story .line{font-family:"Cormorant Garamond", serif; font-size:clamp(22px,3vw,30px); color:var(--muted); margin:.4rem 0; opacity:0; transform:translateY(8px); transition:opacity .9s ease, transform .9s ease}
-    .story .line.show{opacity:1; transform:none}
+    /* Locations */
+    .section{padding:10vh 0}
+    .section h2{
+      font-family:"Cormorant Garamond", serif; font-weight:500;
+      font-size:clamp(26px,3.6vw,40px); letter-spacing:.01em; text-align:center; margin:0 0 16px;
+    }
+    .chips{
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:0 auto; max-width:900px;
+    }
+    .chip{
+      border:1px solid var(--line); border-radius:999px; padding:9px 14px;
+      font-size:13px; background:linear-gradient(180deg,#151517,#101012); color:var(--ink);
+    }
 
-    /* Location presets */
-    .options{display:grid; place-items:center; padding:12vh 0}
-    .tabs{display:flex; gap:8px; justify-content:center; margin:12px 0 18px}
-    .tab{border:1px solid var(--line); background:linear-gradient(180deg,#151517,#101012); color:var(--ink); border-radius:999px; padding:8px 14px; font-size:14px; cursor:pointer}
-    .tab[aria-selected="true"]{border-color:var(--espresso); box-shadow:0 0 0 1px var(--espresso) inset}
-
-    .presets{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:900px; margin:0 auto}
-    .card{border:1px solid var(--line); border-radius:16px; padding:14px; background:linear-gradient(180deg,#141416,#101012)}
-    .card h3{margin:0 0 6px; font-family:"Cormorant Garamond", serif; font-weight:500; letter-spacing:.02em; font-size:20px}
-    .vibe{color:var(--muted); font-size:13px; margin:0 0 8px}
-    .chips{display:flex; flex-wrap:wrap; gap:8px}
-    .chip{border:1px solid var(--line); border-radius:999px; padding:6px 10px; font-size:12px; background:#111113; color:var(--ink); cursor:pointer}
-    .chip[aria-pressed="true"]{border-color:var(--espresso)}
-    @media (max-width:900px){.presets{grid-template-columns:1fr 1fr}}
-    @media (max-width:560px){.presets{grid-template-columns:1fr}}
     footer{border-top:1px solid var(--line); padding:28px 0; color:var(--muted)}
     .foot{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap}
+
+    @media (max-width:560px){
+      .buttons{gap:10px}
+      .btn{padding:11px 16px}
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="container">
       <nav>
-        <div class="wordmark"><span class="quiet">Quiet</span><span style="opacity:.66">by</span><span>Fazil</span></div>
-        <a class="cta" href="#inquiry">Request an Invitation</a>
+        <div class="wordmark">
+          <span class="quiet">Quiet</span><span style="opacity:.66">by</span><span>Fazil</span>
+        </div>
+        <a class="cta" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener" aria-label="Open Instagram to book">Book via Instagram</a>
       </nav>
     </div>
   </header>
+
   <div class="rule" aria-hidden="true"></div>
 
   <!-- HERO -->
-  <section class="leather">
-    <div class="container hero">
-      <video id="heroVid" class="bgvid"
-       autoplay
-       muted
-       playsinline
-       loop
-       preload="auto"
-       controls
-       poster="./assets/water.jpg">
-  <source src="./assets/water.mp4" type="video/mp4">
-     </video>
-      <div class="motion"></div>
-      <div class="sheen"></div>
-      <div class="rays"></div>
-
-      <!-- Optional wordmark image (hides if missing) -->
-      <img class="logo" src="./assets/quiet-logo.png" alt="Quiet by Fazil logo" onerror="this.style.display='none'"/>
+  <section class="hero" role="img" aria-label="Serene leather and light texture">
+    <div class="container hero-inner">
+      <div class="kicker">A D E L A I D E</div>
       <h1 class="headline">Luxury isn’t loud.</h1>
-      <p class="sub">A place of experience. Cinematic calm. Grounded power. Elegant stillness. Crafted in Adelaide — available by invitation.</p>
+      <p class="sub">A calm, invitation-only portrait experience. Cinematic light. Grounded presence. Elegant stillness — crafted quietly in Adelaide.</p>
       <div class="buttons">
-        <a class="btn" id="inquiry" href="mailto:quiet@quietbyfazil.com?subject=Request%20an%20Invitation%20—%20Quiet%20by%20Fazil&body=Tell%20me%20about%20your%20story.">Request an Invitation</a>
-        <a class="btn" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Request an Invitation</a>
+        <a class="btn" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Portfolio on Instagram</a>
       </div>
-      <div class="micro" style="margin-top:12px">By invitation only · Limited monthly sessions</div>
+      <div class="micro">By invitation only · Limited monthly sessions</div>
     </div>
   </section>
 
-  <!-- STORY -->
-  <section class="story">
-    <div class="container" style="text-align:center; padding:8vh 5vw">
-      <div class="line" id="l1">In a world of noise, presence is rare.</div>
-      <div class="line" id="l2">We slow down, so the real you can surface.</div>
-      <div class="line" id="l3">What remains is quiet — and unforgettable.</div>
-    </div>
-  </section>
-
-  <!-- LOCATIONS -->
-  <section class="options">
-    <div class="container" style="text-align:center">
-      <div class="kicker" style="letter-spacing:.24em; color:var(--muted); margin-bottom:6px">S E S S I O N &nbsp; L O C A T I O N S</div>
-      <p class="sub" style="margin:0 auto 18px; max-width:720px">Choose a ready-made location — we’ll confirm timing around the best light. Replace card images in <code>/assets</code> to customise.</p>
-
-      <div class="tabs" role="tablist" aria-label="Location categories">
-        <button class="tab" role="tab" data-tab="cafe" aria-selected="true">In a Café</button>
-        <button class="tab" role="tab" data-tab="open" aria-selected="false">Open Out There</button>
-        <button class="tab" role="tab" data-tab="creative" aria-selected="false">Creative</button>
-      </div>
-
-      <div class="presets" id="presets">
-        <!-- CAFÉ -->
-        <figure class="card" data-group="cafe">
-          <img src="./assets/cafe_rundle.jpg" alt="Rundle St lanes café window light" style="width:100%; height:180px; object-fit:cover; border-radius:10px; margin-bottom:10px" onerror="this.style.display='none'"/>
-          <h3>East End Windows</h3>
-          <p class="vibe">Warm espresso tones, window light, quiet tables.</p>
-          <div class="chips">
-            <button class="chip" data-preset="East End cafés (Rundle St lanes)">Rundle St lanes</button>
-            <button class="chip" data-preset="Market arcades, morning light">Market arcades</button>
-            <button class="chip" data-preset="Peel/Leigh St quiet corners">Peel/Leigh St</button>
-          </div>
-        </figure>
-        <figure class="card" data-group="cafe">
-          <img src="./assets/cafe_textures.jpg" alt="Matte walls and timber tables" style="width:100%; height:180px; object-fit:cover; border-radius:10px; margin-bottom:10px" onerror="this.style.display='none'"/>
-          <h3>Textured Walls</h3>
-          <p class="vibe">Matte walls, timber tables, intimate framing.</p>
-          <div class="chips">
-            <button class="chip" data-preset="Stone/brick café backdrop">Stone/brick</button>
-            <button class="chip" data-preset="High stools by window">High stools</button>
-            <button class="chip" data-preset="Pour-over & hands detail">Hands detail</button>
-          </div>
-        </figure>
-        <figure class="card" data-group="cafe">
-          <img src="./assets/cafe_morning.jpg" alt="Morning ritual—steam and notebooks" style="width:100%; height:180px; object-fit:cover; border-radius:10px; margin-bottom:10px" onerror="this.style.display='none'"/>
-          <h3>Morning Ritual</h3>
-          <p class="vibe">First light, steam, reflective calm.</p>
-          <div class="chips">
-            <button class="chip" data-preset="8:30am soft window light">8:30am light</button>
-            <button class="chip" data-preset="Espresso & notebook">Notebook</button>
-            <button class="chip" data-preset="Corner booth">Corner booth</button>
-          </div>
-        </figure>
-
-        <!-- OPEN OUT THERE -->
-        <figure class="card" data-group="open" style="display:none">
-          <img src="./assets/botanic_palmhouse.jpg" alt="Adelaide Botanic Garden Palm House" style="width:100%; height:180px; object-fit:cover; border-radius:10px; margin-bottom:10px" onerror="this.style.display='none'"/>
-          <h3>Botanic Calm</h3>
-          <p class="vibe">Green canopy, diffused shade, timeless structures.</p>
-          <div class="chips">
-            <button class="chip" data-preset="Adelaide Botanic Garden — Palm House">Palm House</button>
-            <button class="chip" data-preset="Himeji Garden — stone & water">Himeji Garden</button>
-            <button class="chip" data-preset="Tree-lined paths & benches">Tree-lined paths</button>
-          </div>
-        </figure>
-        <figure class="card" data-group="open" style="display:none">
-          <img src="./assets/architecture_north_terrace.jpg" alt="North Terrace colonnades" style="width:100%; height:180px; object-fit:cover; border-radius:10px; margin-bottom:10px" onerror="this.style.display='none'"/>
-          <h3>Architecture Lines</h3>
-          <p class="vibe">Columns, sandstone, shadow play.</p>
-          <div class="chips">
-            <button class="chip" data-preset="North Terrace colonnades">North Terrace</button>
-            <button class="chip" data-preset="Art Gallery & Museum forecourt">AGSA forecourt</button>
-            <button class="chip" data-preset="State Library steps">Library steps</button>
-          </div>
-        </figure>
-        <figure class="card" data-group="open" style="display:none">
-          <img src="./assets/river_torrens.jpg" alt="River Torrens bridges at dusk" style="width:100%; height:180px; object-fit:cover; border-radius:10px; margin-bottom:10px" onerror="this.style.display='none'"/>
-          <h3>River & Bridge</h3>
-          <p class="vibe">Reflections, long lines, dusk glow.</p>
-          <div class="chips">
-            <button class="chip" data-preset="River Torrens footbridges at golden hour">River Torrens</button>
-            <button class="chip" data-preset="Elder Park lawns">Elder Park</button>
-            <button class="chip" data-preset="Festival Centre curves">Festival Centre</button>
-          </div>
-        </figure>
-
-        <!-- CREATIVE -->
-        <figure class="card" data-group="creative" style="display:none">
-          <img src="./assets/sea_jetty.jpg" alt="Glenelg or Brighton Jetty at blue hour" style="width:100%; height:180px; object-fit:cover; border-radius:10px; margin-bottom:10px" onerror="this.style.display='none'"/>
-          <h3>Sea & Minimal Horizon</h3>
-          <p class="vibe">Open water, negative space, slow air.</p>
-          <div class="chips">
-            <button class="chip" data-preset="Glenelg or Brighton Jetty at blue hour">Jetty (blue hour)</button>
-            <button class="chip" data-preset="Semaphore dunes, wind textures">Semaphore dunes</button>
-            <button class="chip" data-preset="Port Willunga pylons at low tide">Willunga pylons</button>
-          </div>
-        </figure>
-        <figure class="card" data-group="creative" style="display:none">
-          <img src="./assets/lookout_windy_point.jpg" alt="Windy Point lookout" style="width:100%; height:180px; object-fit:cover; border-radius:10px; margin-bottom:10px" onerror="this.style.display='none'"/>
-          <h3>Lookout & Sky</h3>
-          <p class="vibe">Wide view, soft gradient light.</p>
-          <div class="chips">
-            <button class="chip" data-preset="Mount Lofty lookout at sunset">Mt Lofty sunset</button>
-            <button class="chip" data-preset="Windy Point twilight">Windy Point</button>
-            <button class="chip" data-preset="Hills road pull-off minimalism">Hills pull-off</button>
-          </div>
-        </figure>
-        <figure class="card" data-group="creative" style="display:none">
-          <img src="./assets/shadow_studio.jpg" alt="Neutral wall shadow studio" style="width:100%; height:180px; object-fit:cover; border-radius:10px; margin-bottom:10px" onerror="this.style.display='none'"/>
-          <h3>Shadow Studio (outdoors)</h3>
-          <p class="vibe">Clean wall, controlled shadows, simple props.</p>
-          <div class="chips">
-            <button class="chip" data-preset="Neutral wall + single chair">Neutral wall</button>
-            <button class="chip" data-preset="Hand details & textures">Hand details</button>
-            <button class="chip" data-preset="Monochrome wardrobe">Monochrome</button>
-          </div>
-        </figure>
-      </div>
-
-      <div class="buttons" style="margin-top:22px">
-        <a class="btn" id="startInquiry" href="#">Start an inquiry</a>
-      </div>
-      <div class="micro" id="choiceNote" style="margin-top:8px">No location chosen yet.</div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container foot">
-      <div>© <span id="yr"></span> Quiet by Fazil</div>
-      <div>
-        <a href="mailto:quiet@quietbyfazil.com">quiet@quietbyfazil.com</a>
-        &nbsp;•&nbsp;
-        <a href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Instagram</a>
+  <!-- INVITATION -->
+  <section class="invite">
+    <div class="container">
+      <div class="card" aria-label="Invitation">
+        <p class="lead">You don’t need to perform. You only need to be here.</p>
+        <p class="note">Quiet by Fazil is a place of experience. We slow the world down so your real self can be seen — with warmth, restraint, and quiet power.</p>
+        <a class="btn" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Send a DM to Reserve</a>
+        <div class="micro" style="margin-top:10px">Response within 24 hours · Adelaide sessions</div>
       </div>
     </div>
-  </footer>
-
-  <script>
-    document.getElementById('yr').textContent = new Date().getFullYear();
-
-    // Soft storytelling reveal
-    const lines = ['l1','l2','l3'].map(id=>document.getElementById(id));
-    let step = 0;
-    function reveal(){ if(step<lines.length){ lines[step++].classList.add('show'); setTimeout(reveal, 1200);} }
-    window.addEventListener('load', ()=> setTimeout(reveal, 400));
-
-    // Tabs
-    const tabs = Array.from(document.querySelectorAll('.tab'));
-    const groups = Array.from(document.querySelectorAll('[data-group]'));
-    tabs.forEach(t=>t.addEventListener('click',()=>{
-      tabs.forEach(x=>x.setAttribute('aria-selected','false'));
-      t.setAttribute('aria-selected','true');
-      const key = t.dataset.tab;
-      groups.forEach(g=>{ g.style.display = (g.dataset.group===key)?'block':'none'; });
-    }));
-
-    // Chips → selections
-    const chips = Array.from(document.querySelectorAll('.chip'));
-    const choice = document.getElementById('choiceNote');
-    const start = document.getElementById('startInquiry');
-    function buildMail(){
-      const selected = chips.filter(c=>c.getAttribute('aria-pressed')==='true').map(c=>c.dataset.preset);
-      if(selected.length){
-        choice.textContent = 'Chosen: ' + selected.join(' • ');
-        const subject = 'Quiet by Fazil — Location Inquiry';
-        const body = 'Name:%0AInstagram:%0APreferred dates:%0A%0ALocations I like: ' + encodeURIComponent(selected.join(', ')) + '%0A%0APreferred time (golden hour / morning window light):%0A%0AMy story:';
-        start.href = 'mailto:quiet@quietbyfazil.com?subject=' + encodeURIComponent(subject) + '&body=' + body;
-      } else {
-        choice.textContent = 'No location chosen yet.';
-        start.href = '#';
-      }
-    }
-    chips.forEach(c=>c.addEventListener('click',()=>{
-      const on = c.getAttribute('aria-pressed')==='true';
-      c.setAttribute('aria-pressed', String(!on));
-      buildMail();
-    }));
-    buildMail();
-  </script>
-  <script>
-  const v = document.getElementById('heroVid');
-  if (v) {
-    const badge = document.createElement('div');
-    badge.style.cssText = "position:fixed;bottom:10px;left:10px;background:#111;color:#ede7dc;font:12px Inter;padding:6px 8px;border-radius:6px;z-index:9999";
-    badge.textContent = "Video: loading…";
-    document.body.appendChild(badge);
-
-    const say = t => badge.textContent = "Video: " + t;
-    v.addEventListener('loadedmetadata', ()=>say('metadata loaded'));
-    v.addEventListener('canplay', ()=>say('canplay ✓'));
-    v.addEventListener('play', ()=>say('playing ✓'));
-    v.addEventListener('error', ()=>say('error — check codec or path'));
-
-    setTimeout(()=>{
-      if (v.paused) {
-        v.muted = true;
-        v.play().catch(()=>say('autoplay blocked'));
-      }
-    }, 600);
-  }
-</script>
-</body>
-</html>
+  </secti
