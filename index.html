@@ -12,8 +12,8 @@
   <style>
     :root{
       --bg:#0b0b0c;   /* matte black */
-      --ink:#ede7dc; /* ivory */
-      --muted:#c9c1b3; /* fog */
+      --ink:#ede7dc;  /* ivory */
+      --muted:#c9c1b3;/* fog */
       --line:#202123; /* hairline */
       --espresso:#6b4a33; /* warm accent */
     }
@@ -32,7 +32,7 @@
       border-bottom:1px solid var(--line);
     }
     .container{width:min(1100px,92vw); margin:0 auto}
-    nav{display:flex; align-items:center; justify-content:space-between; padding:calc(12px + env(safe-area-inset-top,0)) 0 12px 0}
+    nav{display:flex; align-items:center; justify-content:space-between; padding:12px 0}
     .wordmark{
       display:flex; gap:.5rem; align-items:baseline;
       font-family:"Cormorant Garamond",serif; letter-spacing:.06em; font-size:22px;
@@ -52,7 +52,7 @@
     }
     .cta:hover{filter:brightness(1.06)}
 
-    /* HERO — responsive background image (no filename changes needed) */
+    /* HERO — desktop uses wide image; Instagram/mobile uses 4:5 image */
     .hero-wrap{
       background:#0b0b0c; border-bottom:1px solid var(--line);
       display:flex; justify-content:center; align-items:center;
@@ -60,27 +60,34 @@
     }
     .hero-bg{
       width:85%;
-      aspect-ratio:21/9; /* desktop/wide */
-      height:auto; /* let aspect-ratio control height */
+      aspect-ratio:21/9; /* desktop/wide look */
+      height:auto;
       border-radius:22px; overflow:hidden;
       box-shadow:0 20px 60px rgba(0,0,0,.45);
-      background: url('./assets/hero.jpg') center/cover no-repeat, linear-gradient(180deg,#0c0c0e,#0b0b0c);
-      min-height:40vh; /* safety for very short viewports */
+      background: url("./assets/hero-desktop.jpg") center/cover no-repeat,
+                  linear-gradient(180deg,#0c0c0e,#0b0b0c);
+      min-height:40vh;
     }
-    /* Fallback for older browsers that don't support aspect-ratio */
-    @supports not (aspect-ratio: 1 / 1){
+    @supports not (aspect-ratio:1/1){
       .hero-bg{height:70vh}
     }
-    /* Mobile: auto-switch to portrait framing without changing files */
+    /* Mobile: switch to Instagram-friendly 4:5 crop (same asset you’ll post) */
     @media (max-width:900px){
       .hero-wrap{padding:4vh 0}
-      .hero-bg{width:92vw; aspect-ratio:4/5; background-position:center 45%}
+      .hero-bg{
+        width:92vw;
+        aspect-ratio:4/5;
+        background-image:url("./assets/hero-insta.jpg");
+        background-position:center 45%;
+      }
     }
-      .hero-card{aspect-ratio: 4 / 5; width:92vw; background-image: url('./assets/hero-tall.jpg');}
-      .hero-card img{object-position:center 45%} /* bias a touch upward for faces */
-    }
-      .hero-card{aspect-ratio: 4 / 5; width:92vw}
-      .hero-card img{object-position:center 45%} /* bias a touch upward for faces */
+    /* Instagram in-app browser: force 4:5 */
+    body.ig .hero-bg{
+      width:92vw;
+      aspect-ratio:4/5;
+      background-image:url("./assets/hero-insta.jpg");
+      background-size:cover;
+      background-position:center 45%;
     }
 
     /* Identity */
@@ -102,9 +109,9 @@
     }
     .btn:hover{filter:brightness(1.05)}
 
-    /* Stories (quiet, matte cards) */
-    .stories{border-top:1px solid var(--line); background:linear-gradient(180deg,#0e0e10,#0b0b0c);}    
-    .grid{width:min(1100px,92vw); margin:0 auto; padding:7vh 0; display:grid; gap:14px; grid-template-columns:repeat(3,1fr);}    
+    /* Stories */
+    .stories{border-top:1px solid var(--line); background:linear-gradient(180deg,#0e0e10,#0b0b0c);}
+    .grid{width:min(1100px,92vw); margin:0 auto; padding:7vh 0; display:grid; gap:14px; grid-template-columns:repeat(3,1fr);}
     .card{
       border:1px solid var(--line); border-radius:18px; padding:18px;
       background:linear-gradient(180deg,#141416,#0f0f12); box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);
@@ -118,20 +125,6 @@
     footer{border-top:1px solid var(--line); padding:26px 0; color:var(--muted)}
     .foot{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap}
     @media (max-width:560px){ .btn{padding:11px 16px} }
-    /* Instagram in-app browser: show FULL image (no crop) */
-    /* We detect IG and switch the hero to letterboxed "contain" mode */
-    body.ig .hero-bg{
-      background-size: contain;            /* show entire image */
-      background-position: center center;  /* keep subject centered */
-      background-repeat: no-repeat;
-      aspect-ratio: 21 / 9;                /* set to your hero.jpg native ratio */
-      width:92vw;                          /* a bit narrower to avoid edge clipping */
-      min-height: auto;                    /* let aspect-ratio handle height */
-      box-shadow:0 12px 40px rgba(0,0,0,.45);
-    }
-    @media (min-width:901px){
-      body.ig .hero-bg{width:min(1100px,92vw)}
-    }
   </style>
 </head>
 <body>
@@ -145,7 +138,7 @@
     </div>
   </header>
 
-  <!-- Hero (clean image via CSS background; uses existing /assets/hero.jpg) -->
+  <!-- Hero -->
   <section class="hero-wrap">
     <div class="hero-bg" role="img" aria-label="Quiet by Fazil — a serene storymaking space in Adelaide"></div>
   </section>
@@ -157,7 +150,7 @@
       <p class="meta">Quiet by Fazil · Adelaide · By invitation only</p>
       <div class="buttons">
         <a class="btn" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Request an Invitation</a>
-        <a class="btn" href="mailto:quiet@quietbyfazil.com">Email</a>
+        <a class="btn" href="mailto:quietbyfazil@yahoo.com">Email</a>
       </div>
     </div>
   </section>
@@ -194,84 +187,18 @@
       <div>
         <a href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Instagram</a>
         <span aria-hidden="true"> · </span>
-        <a href="mailto:quiet@quietbyfazil.com">quiet@quietbyfazil.com</a>
+        <a href="mailto:quietbyfazil@yahoo.com">quietbyfazil@yahoo.com</a>
       </div>
     </div>
   </footer>
 
-  <!-- IG Export helper (creates perfect 4:5 or 1:1 crops of the hero for Instagram) -->
-  <section class="identity" aria-label="Instagram export">
-    <div class="container">
-      <p class="meta">Export IG‑ready versions of your hero image (no cropping on Instagram).</p>
-      <div class="buttons">
-        <button class="btn" id="ig-portrait">Download IG Portrait 4:5 (1080×1350)</button>
-        <button class="btn" id="ig-square">Download IG Square 1:1 (1080×1080)</button>
-        <button class="btn" id="ig-portrait-safe">Download 4:5 with Safe Margins</button>
-      </div>
-    </div>
-  </section>
-
   <script>
-    // ---- IG Exporter ----
-    // Creates Instagram-perfect crops from /assets/hero.jpg without manual editing.
-    (function(){
-      const SRC = './assets/hero.jpg'; // change if your hero path differs
-
-      function drawIG(targetW, targetH, safePadding = 0, fileName = 'quietbyfazil.jpg'){
-        const canvas = document.createElement('canvas');
-        canvas.width = targetW; canvas.height = targetH;
-        const ctx = canvas.getContext('2d');
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = () => {
-          // Compute cover fit (like CSS object-fit: cover)
-          const imgAR = img.width / img.height;
-          const tgtAR = targetW / targetH;
-          let drawW, drawH;
-          if(imgAR > tgtAR){
-            // image is wider than target
-            drawH = targetH * (1 - safePadding*2);
-            drawW = drawH * imgAR;
-          } else {
-            // image is taller than target
-            drawW = targetW * (1 - safePadding*2);
-            drawH = drawW / imgAR;
-          }
-          const cx = targetW/2; const cy = targetH/2;
-          const x = cx - drawW/2; const y = cy - drawH/2 - (safePadding>0 ? drawH*0.05 : 0); // bias slightly upward for faces
-
-          // Background matte for padded versions
-          if(safePadding>0){
-            ctx.fillStyle = '#0b0b0c';
-            ctx.fillRect(0,0,targetW,targetH);
-          }
-
-          ctx.imageSmoothingQuality = 'high';
-          ctx.drawImage(img, x, y, drawW, drawH);
-
-          canvas.toBlob(b => {
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(b);
-            a.download = fileName; a.click();
-            setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
-          }, 'image/jpeg', 0.95);
-        };
-        img.src = SRC + (SRC.includes('?') ? '&' : '?') + 'v=' + Date.now();
-      }
-
-      document.getElementById('ig-portrait')?.addEventListener('click', ()=>drawIG(1080,1350,0,'quiet-portrait-1080x1350.jpg'));
-      document.getElementById('ig-square')?.addEventListener('click', ()=>drawIG(1080,1080,0,'quiet-square-1080x1080.jpg'));
-      document.getElementById('ig-portrait-safe')?.addEventListener('click', ()=>drawIG(1080,1350,0.06,'quiet-portrait-safe-1080x1350.jpg'));
-    })();
-  </script>
-  <script>
-    // Detect Instagram in-app browser and add class to <body>
+    // Instagram in-app browser detection to force the 4:5 hero image
     (function(){
       var ua = navigator.userAgent || navigator.vendor || window.opera;
-      var isIG = /Instagram/i.test(ua);
-      if(isIG){ document.body.classList.add('ig'); }
+      if (/Instagram/i.test(ua)) { document.body.classList.add('ig'); }
     })();
+    document.getElementById('yr').textContent = new Date().getFullYear();
   </script>
 </body>
-</html>
 </html>
