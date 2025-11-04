@@ -3,20 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quiet by Fazil — A Luxury Portrait Invitation (Adelaide)</title>
-  <meta name="description" content="Quiet by Fazil — a serene, invitation-only portrait experience in Adelaide. Cinematic calm. Grounded power. Elegant stillness. Book via Instagram." />
+  <title>Quiet by Fazil — Adelaide</title>
+  <meta name="description" content="Quiet by Fazil — a quiet, invitation-only portrait experience in Adelaide. Luxury through stillness." />
   <meta name="theme-color" content="#0b0b0c" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0b0c;         /* matte black */
-      --ink:#ede7dc;        /* ivory */
-      --muted:#c9c1b3;      /* fog */
-      --espresso:#6b4a33;   /* warm underline accent */
-      --line:#1f2022;       /* hairline */
+      --bg:#0b0b0c;   /* matte black */
+      --ink:#ede7dc; /* ivory */
+      --muted:#c9c1b3; /* fog */
+      --line:#202123; /* hairline */
+      --espresso:#6b4a33; /* warm accent */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -26,169 +25,94 @@
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Layout */
-    .container{width:min(1000px,92vw); margin:0 auto}
+    /* Top bar sits ABOVE the image (not overlayed) */
     header{
       position:sticky; top:0; z-index:10;
+      background:#0b0b0cf2; backdrop-filter:blur(8px) saturate(120%);
       border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(11,11,12,.85), rgba(11,11,12,.55) 60%, rgba(11,11,12,0));
-      backdrop-filter: blur(8px) saturate(120%);
     }
-    nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .container{width:min(1100px,92vw); margin:0 auto}
+    nav{display:flex; align-items:center; justify-content:space-between; padding:12px 0}
     .wordmark{
-      display:flex; align-items:baseline; gap:.5rem;
-      font-family:"Cormorant Garamond", serif; letter-spacing:.06em; font-weight:400; font-size:22px;
+      display:flex; gap:.5rem; align-items:baseline;
+      font-family:"Cormorant Garamond",serif; letter-spacing:.06em; font-size:22px;
     }
     .wordmark .quiet{position:relative}
     .wordmark .quiet:after{
-      content:""; position:absolute; left:.14em; right:-.12em; bottom:-.22em; height:2px;
+      content:""; position:absolute; left:.14em; right:-.12em; bottom:-.24em; height:2px;
       background:linear-gradient(90deg, transparent 0 6%, var(--espresso) 20% 80%, transparent 94%);
       opacity:.55;
     }
     .cta{
-      display:inline-flex; align-items:center; gap:.6rem;
-      padding:10px 16px; border-radius:999px;
-      border:1px solid var(--line); color:var(--ink); text-decoration:none; font-size:14px;
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:10px 16px; border-radius:999px; text-decoration:none; color:var(--ink);
+      border:1px solid var(--line);
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(44,38,34,.16));
+      font-size:14px;
     }
     .cta:hover{filter:brightness(1.06)}
-    .rule{height:1px; background:linear-gradient(90deg, transparent, #262629, transparent)}
 
-    /* Hero */
+    /* HERO IMAGE ONLY — no text, no overlays */
+    .hero-wrap{border-bottom:1px solid var(--line); background:#0b0b0c;}
     .hero{
-      position:relative; overflow:hidden; border-bottom:1px solid var(--line);
-      background:
-        url('./assets/hero.jpg') center/cover no-repeat,
-        repeating-linear-gradient(25deg, rgba(255,255,255,.02) 0 2px, rgba(0,0,0,0) 2px 7px),
-        linear-gradient(180deg,#0c0c0e,#0b0b0c);
+      width:100%; height:100svh; /* full screen height, mobile-safe */
+      display:block; object-fit:cover; object-position:center;
+      background:#0b0b0c;
+      /* Prevent any accidental overlays */
+      outline:none; border:none; box-shadow:none;
+      user-select:none; -webkit-user-drag:none;
     }
-    .hero:after{ /* subtle vignette */
-      content:""; position:absolute; inset:0; pointer-events:none;
-      box-shadow:inset 0 0 180px 80px rgba(0,0,0,.65);
-    }
-    .hero-inner{ position:relative; text-align:center; padding:18vh 0 16vh; }
 
-    .kicker{
-      letter-spacing:.28em; text-transform:uppercase; color:var(--muted);
-      font-size:12px; margin-bottom:12px;
+    /* Identity block BELOW the image */
+    .identity{
+      padding:7vh 0; text-align:center;
+      background:linear-gradient(180deg,#0e0e10,#0b0b0c);
+      border-top:1px solid var(--line);
     }
-    .headline{
-      font-family:"Cormorant Garamond", serif;
-      font-weight:500;
-      font-size:clamp(44px,8vw,110px);
-      line-height:1.02; letter-spacing:.005em; margin:.2rem auto .8rem;
-      text-shadow:0 1px 0 rgba(0,0,0,.25);
-      max-width:14ch;
+    .tagline{
+      font-family:"Cormorant Garamond",serif; font-weight:500;
+      font-size:clamp(28px,4.8vw,40px); letter-spacing:.01em; margin:0 0 8px;
     }
-    .sub{
-      max-width:720px; margin:0 auto 22px; color:var(--muted);
-      font-size:clamp(16px,2vw,18px); text-wrap:balance;
-    }
+    .meta{color:var(--muted); margin:0 0 18px; font-size:14px}
     .buttons{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
     .btn{
       padding:12px 18px; border-radius:999px; border:1px solid var(--line);
       text-decoration:none; color:var(--ink); font-size:14px;
       background:linear-gradient(180deg, rgba(237,231,220,.06), rgba(44,38,34,.18));
     }
-    .btn:hover{filter:brightness(1.06)}
-    .micro{font-size:12px; color:var(--muted); margin-top:10px}
+    .btn:hover{filter:brightness(1.05)}
 
-    /* Invitation card */
-    .invite{
-      border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg,#0e0e10,#0b0b0c);
-    }
-    .card{
-      margin:0 auto; padding:9vh 6vw; text-align:center;
-      border:1px solid var(--line); border-radius:20px;
-      background:linear-gradient(180deg,#131316,#0f0f12);
-      max-width:860px;
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);
-    }
-    .lead{
-      font-family:"Cormorant Garamond", serif; font-weight:500;
-      font-size:clamp(24px,3vw,34px); letter-spacing:.02em; margin:0 0 8px;
-    }
-    .note{color:var(--muted); margin:0 0 18px; font-size:15px}
-
-    /* Locations */
-    .section{padding:10vh 0}
-    .section h2{
-      font-family:"Cormorant Garamond", serif; font-weight:500;
-      font-size:clamp(26px,3.6vw,40px); letter-spacing:.01em; text-align:center; margin:0 0 16px;
-    }
-    .chips{
-      display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:0 auto; max-width:900px;
-    }
-    .chip{
-      border:1px solid var(--line); border-radius:999px; padding:9px 14px;
-      font-size:13px; background:linear-gradient(180deg,#151517,#101012); color:var(--ink);
-    }
-
-    footer{border-top:1px solid var(--line); padding:28px 0; color:var(--muted)}
+    footer{border-top:1px solid var(--line); padding:26px 0; color:var(--muted)}
     .foot{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap}
-
-    @media (max-width:560px){
-      .buttons{gap:10px}
-      .btn{padding:11px 16px}
-    }
+    @media (max-width:560px){ .btn{padding:11px 16px} }
   </style>
 </head>
 <body>
+  <!-- Top bar (not on top of image) -->
   <header>
     <div class="container">
       <nav>
-        <div class="wordmark">
-          <span class="quiet">Quiet</span><span style="opacity:.66">by</span><span>Fazil</span>
-        </div>
-        <a class="cta" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener" aria-label="Open Instagram to book">Book via Instagram</a>
+        <div class="wordmark"><span class="quiet">Quiet</span><span style="opacity:.66">by</span><span>Fazil</span></div>
+        <a class="cta" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Book via Instagram</a>
       </nav>
     </div>
   </header>
 
-  <div class="rule" aria-hidden="true"></div>
+  <!-- Full-bleed image only -->
+  <section class="hero-wrap">
+    <!-- Put your image at /assets/hero.jpg -->
+    <img class="hero" src="./assets/hero.jpg" alt="Quiet by Fazil — a serene storymaking space in Adelaide" />
+  </section>
 
-  <!-- HERO -->
-  <section class="hero" role="img" aria-label="Serene leather and light texture">
-    <div class="container hero-inner">
-      <div class="kicker">A D E L A I D E</div>
-      <h1 class="headline">Luxury isn’t loud.</h1>
-      <p class="sub">A calm, invitation-only portrait experience. Cinematic light. Grounded presence. Elegant stillness — crafted quietly in Adelaide.</p>
+  <!-- Identity (below image, on solid background) -->
+  <section class="identity">
+    <div class="container">
+      <h1 class="tagline">Luxury isn’t loud.</h1>
+      <p class="meta">Quiet by Fazil · Adelaide · By invitation only</p>
       <div class="buttons">
         <a class="btn" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Request an Invitation</a>
-        <a class="btn" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Portfolio on Instagram</a>
+        <a class="btn" href="mailto:quiet@quietbyfazil.com">Email</a>
       </div>
-      <div class="micro">By invitation only · Limited monthly sessions</div>
-    </div>
-  </section>
-
-  <!-- INVITATION -->
-  <section class="invite">
-    <div class="container">
-      <div class="card" aria-label="Invitation">
-        <p class="lead">You don’t need to perform. You only need to be here.</p>
-        <p class="note">Quiet by Fazil is a place of experience. We slow the world down so your real self can be seen — with warmth, restraint, and quiet power.</p>
-        <a class="btn" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Send a DM to Reserve</a>
-        <div class="micro" style="margin-top:10px">Response within 24 hours · Adelaide sessions</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LOCATIONS -->
-  <section class="section">
-    <div class="container">
-      <h2>Where we create (Adelaide)</h2>
-      <div class="chips" aria-label="Suggested locations in Adelaide">
-        <span class="chip">Rundle St lanes — café window light</span>
-        <span class="chip">Himeji Garden — stone & water</span>
-        <span class="chip">Botanic Garden Palm House</span>
-        <span class="chip">North Terrace colonnades</span>
-        <span class="chip">River Torrens bridges (dusk)</span>
-        <span class="chip">Glenelg / Brighton Jetty (blue hour)</span>
-        <span class="chip">Windy Point lookout</span>
-        <span class="chip">Shadow studio — neutral wall</span>
-      </div>
-      <p class="micro" style="text-align:center; margin-top:14px">We’ll suggest timing around golden hour or soft morning window light.</p>
     </div>
   </section>
 
@@ -203,8 +127,6 @@
     </div>
   </footer>
 
-  <script>
-    document.getElementById('yr').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 </body>
 </html>
