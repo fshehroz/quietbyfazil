@@ -326,5 +326,27 @@
     }));
     buildMail();
   </script>
+  <script>
+  const v = document.getElementById('heroVid');
+  if (v) {
+    const badge = document.createElement('div');
+    badge.style.cssText = "position:fixed;bottom:10px;left:10px;background:#111;color:#ede7dc;font:12px Inter;padding:6px 8px;border-radius:6px;z-index:9999";
+    badge.textContent = "Video: loading…";
+    document.body.appendChild(badge);
+
+    const say = t => badge.textContent = "Video: " + t;
+    v.addEventListener('loadedmetadata', ()=>say('metadata loaded'));
+    v.addEventListener('canplay', ()=>say('canplay ✓'));
+    v.addEventListener('play', ()=>say('playing ✓'));
+    v.addEventListener('error', ()=>say('error — check codec or path'));
+
+    setTimeout(()=>{
+      if (v.paused) {
+        v.muted = true;
+        v.play().catch(()=>say('autoplay blocked'));
+      }
+    }, 600);
+  }
+</script>
 </body>
 </html>
