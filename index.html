@@ -67,6 +67,23 @@
 
     footer{border-top:1px solid var(--line); padding:28px 0; color:var(--muted)}
     .foot{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap}
+      /* Divider line to clearly separate nav/hero */
+    .rule{height:1px; background:linear-gradient(90deg, transparent, #262629, transparent)}
+
+    /* Tabs & location presets */
+    .tabs{display:flex; gap:8px; justify-content:center; margin:12px 0 18px}
+    .tab{border:1px solid var(--line); background:linear-gradient(180deg,#151517,#101012); color:var(--ink); border-radius:999px; padding:8px 14px; font-size:14px; cursor:pointer}
+    .tab[aria-selected="true"]{border-color:var(--espresso); box-shadow:0 0 0 1px var(--espresso) inset}
+
+    .presets{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:900px; margin:0 auto}
+    .card{border:1px solid var(--line); border-radius:16px; padding:14px; background:linear-gradient(180deg,#141416,#101012)}
+    .card h3{margin:0 0 6px; font-family:"Cormorant Garamond", serif; font-weight:500; letter-spacing:.02em; font-size:20px}
+    .vibe{color:var(--muted); font-size:13px; margin:0 0 8px}
+    .chips{display:flex; flex-wrap:wrap; gap:8px}
+    .chip{border:1px solid var(--line); border-radius:999px; padding:6px 10px; font-size:12px; background:#111113; color:var(--ink); cursor:pointer}
+    .chip[aria-pressed="true"]{border-color:var(--espresso)}
+    @media (max-width:900px){.presets{grid-template-columns:1fr 1fr}}
+    @media (max-width:560px){.presets{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -78,6 +95,7 @@
       </nav>
     </div>
   </header>
+  <div class="rule" aria-hidden="true"></div>
 
   <!-- HERO -->
   <section class="leather">
@@ -106,15 +124,108 @@
   <!-- OPTIONS (minimal) -->
   <section class="options">
     <div class="container" style="text-align:center">
-      <div class="pillbar" role="group" aria-label="Session setting">
-        <button class="pill" data-style="In a Café" aria-pressed="false">In a Café</button>
-        <button class="pill" data-style="Open Out There" aria-pressed="false">Open Out There</button>
-        <button class="pill" data-style="Creative Studio" aria-pressed="false">Creative Studio</button>
+      <div class="kicker" style="letter-spacing:.24em; color:var(--muted); margin-bottom:6px">S E S S I O N &nbsp; L O C A T I O N S</div>
+      <p class="sub" style="margin:0 auto 10px; max-width:700px">Choose a ready-made location so we skip back-and-forth. You can select more than one; we’ll confirm timing around light.</p>
+
+      <div class="tabs" role="tablist" aria-label="Location categories">
+        <button class="tab" role="tab" data-tab="cafe" aria-selected="true">In a Café</button>
+        <button class="tab" role="tab" data-tab="open" aria-selected="false">Open Out There</button>
+        <button class="tab" role="tab" data-tab="creative" aria-selected="false">Creative</button>
       </div>
-      <div class="buttons" style="margin-top:18px">
+
+      <div class="presets" id="presets">
+        <!-- CAFÉ -->
+        <div class="card" data-group="cafe">
+          <h3>East End Windows</h3>
+          <p class="vibe">Warm espresso tones, window light, quiet tables.</p>
+          <div class="chips">
+            <button class="chip" data-preset="East End cafés (Rundle St lanes)">Rundle St lanes</button>
+            <button class="chip" data-preset="Market arcades, morning light">Market arcades</button>
+            <button class="chip" data-preset="Peel/Leigh St quiet corners">Peel/Leigh St</button>
+          </div>
+        </div>
+        <div class="card" data-group="cafe">
+          <h3>Textured Walls</h3>
+          <p class="vibe">Matte walls, timber tables, intimate framing.</p>
+          <div class="chips">
+            <button class="chip" data-preset="Stone/brick café backdrop">Stone/brick</button>
+            <button class="chip" data-preset="High stools by window">High stools</button>
+            <button class="chip" data-preset="Pour-over & hands detail">Hands detail</button>
+          </div>
+        </div>
+        <div class="card" data-group="cafe">
+          <h3>Morning Ritual</h3>
+          <p class="vibe">First light, steam, reflective calm.</p>
+          <div class="chips">
+            <button class="chip" data-preset="8:30am soft window light">8:30am light</button>
+            <button class="chip" data-preset="Espresso & notebook">Notebook</button>
+            <button class="chip" data-preset="Corner booth">Corner booth</button>
+          </div>
+        </div>
+
+        <!-- OPEN OUT THERE -->
+        <div class="card" data-group="open" style="display:none">
+          <h3>Botanic Calm</h3>
+          <p class="vibe">Green canopy, diffused shade, timeless structures.</p>
+          <div class="chips">
+            <button class="chip" data-preset="Adelaide Botanic Garden — Palm House">Palm House</button>
+            <button class="chip" data-preset="Himeji Garden — stone & water">Himeji Garden</button>
+            <button class="chip" data-preset="Tree-lined paths & benches">Tree-lined paths</button>
+          </div>
+        </div>
+        <div class="card" data-group="open" style="display:none">
+          <h3>Architecture Lines</h3>
+          <p class="vibe">Columns, sandstone, shadow play.</p>
+          <div class="chips">
+            <button class="chip" data-preset="North Terrace colonnades">North Terrace</button>
+            <button class="chip" data-preset="Art Gallery & Museum forecourt">AGSA forecourt</button>
+            <button class="chip" data-preset="State Library steps">Library steps</button>
+          </div>
+        </div>
+        <div class="card" data-group="open" style="display:none">
+          <h3>River & Bridge</h3>
+          <p class="vibe">Reflections, long lines, dusk glow.</p>
+          <div class="chips">
+            <button class="chip" data-preset="River Torrens footbridges at golden hour">River Torrens</button>
+            <button class="chip" data-preset="Elder Park lawns">Elder Park</button>
+            <button class="chip" data-preset="Festival Centre curves">Festival Centre</button>
+          </div>
+        </div>
+
+        <!-- CREATIVE -->
+        <div class="card" data-group="creative" style="display:none">
+          <h3>Sea & Minimal Horizon</h3>
+          <p class="vibe">Open water, negative space, slow air.</p>
+          <div class="chips">
+            <button class="chip" data-preset="Glenelg or Brighton Jetty at blue hour">Jetty (blue hour)</button>
+            <button class="chip" data-preset="Semaphore dunes, wind textures">Semaphore dunes</button>
+            <button class="chip" data-preset="Port Willunga pylons at low tide">Willunga pylons</button>
+          </div>
+        </div>
+        <div class="card" data-group="creative" style="display:none">
+          <h3>Lookout & Sky</h3>
+          <p class="vibe">Wide view, soft gradient light.</p>
+          <div class="chips">
+            <button class="chip" data-preset="Mount Lofty lookout at sunset">Mt Lofty sunset</button>
+            <button class="chip" data-preset="Windy Point twilight">Windy Point</button>
+            <button class="chip" data-preset="Hills road pull-off minimalism">Hills pull-off</button>
+          </div>
+        </div>
+        <div class="card" data-group="creative" style="display:none">
+          <h3>Shadow Studio (outdoors)</h3>
+          <p class="vibe">Clean wall, controlled shadows, simple props.</p>
+          <div class="chips">
+            <button class="chip" data-preset="Neutral wall + single chair">Neutral wall</button>
+            <button class="chip" data-preset="Hand details & textures">Hand details</button>
+            <button class="chip" data-preset="Monochrome wardrobe">Monochrome</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="buttons" style="margin-top:22px">
         <a class="btn" id="startInquiry" href="#">Start an inquiry</a>
       </div>
-      <div class="micro" id="choiceNote" style="margin-top:8px">No setting chosen yet.</div>
+      <div class="micro" id="choiceNote" style="margin-top:8px">No location chosen yet.</div>
     </div>
   </section>
 
@@ -137,23 +248,34 @@
     let step = 0; function reveal(){ if(step<lines.length){ lines[step++].classList.add('show'); setTimeout(reveal, 1200);} }
     window.addEventListener('load', ()=> setTimeout(reveal, 400));
 
-    // Option pills → prefilled email
-    const pills = Array.from(document.querySelectorAll('.pill'));
+    // Tabs
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+    const groups = Array.from(document.querySelectorAll('[data-group]'));
+    tabs.forEach(t=>t.addEventListener('click',()=>{
+      tabs.forEach(x=>x.setAttribute('aria-selected','false'));
+      t.setAttribute('aria-selected','true');
+      const key = t.dataset.tab;
+      groups.forEach(g=>{ g.style.display = (g.dataset.group===key)?'block':'none'; });
+    }));
+
+    // Chips → selections
+    const chips = Array.from(document.querySelectorAll('.chip'));
     const choice = document.getElementById('choiceNote');
     const start = document.getElementById('startInquiry');
-    function sync(){
-      const selected = pills.filter(p=>p.getAttribute('aria-pressed')==='true').map(p=>p.dataset.style);
+    function buildMail(){
+      const selected = chips.filter(c=>c.getAttribute('aria-pressed')==='true').map(c=>c.dataset.preset);
       if(selected.length){
         choice.textContent = 'Chosen: ' + selected.join(' • ');
-        const subject = 'Quiet by Fazil — Inquiry (' + selected.join(', ') + ')';
-        const body = 'Name:%0AInstagram:%0APreferred dates:%0A%0AI am drawn to: ' + encodeURIComponent(selected.join(', ')) + '%0A%0AMy story:';
+        const subject = 'Quiet by Fazil — Location Inquiry';
+        const body = 'Name:%0AInstagram:%0APreferred dates:%0A%0ALocations I like: ' + encodeURIComponent(selected.join(', ')) + '%0A%0APreferred time (golden hour / morning window light):%0A%0AMy story:';
         start.href = 'mailto:quiet@quietbyfazil.com?subject=' + encodeURIComponent(subject) + '&body=' + body;
       } else {
-        choice.textContent = 'No setting chosen yet.';
+        choice.textContent = 'No location chosen yet.';
         start.href = '#';
       }
     }
-    pills.forEach(p=>p.addEventListener('click', ()=>{ const on=p.getAttribute('aria-pressed')==='true'; p.setAttribute('aria-pressed', String(!on)); sync(); }));
+    chips.forEach(c=>c.addEventListener('click',()=>{ const on=c.getAttribute('aria-pressed')==='true'; c.setAttribute('aria-pressed', String(!on)); buildMail(); }));
+    buildMail(); }));
     sync();
   </script>
 </body>
