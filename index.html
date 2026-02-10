@@ -52,7 +52,6 @@
     }
     .cta:hover{filter:brightness(1.06)}
 
-    /* Secondary link-style CTA (quiet) */
     .cta-link{
       color:var(--muted); text-decoration:none; font-size:14px;
       border-bottom:1px solid rgba(201,193,179,.25);
@@ -65,16 +64,19 @@
       display:flex; justify-content:center; align-items:center;
       padding:6vh 0;
     }
+
+    /* FIXED: push image DOWN so top text doesn't crop */
     .hero-bg{
       width:85%;
       aspect-ratio:21/9;
       height:auto;
       border-radius:22px; overflow:hidden;
       box-shadow:0 20px 60px rgba(0,0,0,.45);
-      background: url("./assets/hero-desktop.jpg") center/cover no-repeat,
+      background: url("./assets/hero-desktop.jpg") center 35%/cover no-repeat,
                   linear-gradient(180deg,#0c0c0e,#0b0b0c);
       min-height:40vh;
     }
+
     @supports not (aspect-ratio:1/1){ .hero-bg{height:70vh} }
 
     @media (max-width:900px){
@@ -83,7 +85,7 @@
         width:92vw;
         aspect-ratio:4/5;
         background-image:url("./assets/hero-insta.jpg");
-        background-position:center 45%;
+        background-position:center 35%; /* FIXED */
       }
     }
     body.ig .hero-bg{
@@ -91,7 +93,7 @@
       aspect-ratio:4/5;
       background-image:url("./assets/hero-insta.jpg");
       background-size:cover;
-      background-position:center 45%;
+      background-position:center 35%; /* FIXED */
     }
 
     .identity{
@@ -105,7 +107,6 @@
     }
     .meta{color:var(--muted); margin:0 0 18px; font-size:14px}
 
-    /* NEW: clarity line + what-you-get strip */
     .clarity{
       width:min(820px,92vw);
       margin:0 auto 16px;
@@ -135,7 +136,6 @@
     }
     .btn:hover{filter:brightness(1.05)}
 
-    /* Stories */
     .stories{border-top:1px solid var(--line); background:linear-gradient(180deg,#0e0e10,#0b0b0c);}    
     .grid{width:min(1100px,92vw); margin:0 auto; padding:7vh 0; display:grid; gap:14px; grid-template-columns:repeat(3,1fr);}    
     .card{
@@ -149,7 +149,6 @@
     @media (max-width:560px){.grid{grid-template-columns:1fr}}
     @media (max-width:560px){ .btn{padding:11px 16px} }
 
-    /* NEW: section heading for selected sessions */
     .section-title{
       text-align:center;
       color:var(--ink);
@@ -180,8 +179,6 @@
     <div class="container">
       <nav>
         <div class="wordmark"><span class="quiet">Quiet</span><span style="opacity:.66">by</span><span>Fazil</span></div>
-
-        <!-- CHANGED: one primary CTA + one quiet secondary link -->
         <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:flex-end;">
           <a class="cta" href="https://YOUR-INSTANT-FORM-LINK" target="_blank" rel="noopener">Request a Session</a>
           <a class="cta-link" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Message on Instagram</a>
@@ -197,23 +194,15 @@
   <section class="identity">
     <div class="container">
       <h1 class="tagline">Luxury isn’t loud.</h1>
-
-      <!-- CHANGED: clear offer + location + softer qualifier -->
       <p class="meta">Quiet, editorial portraits · Adelaide · Limited sessions each month</p>
-
-      <!-- NEW: clarity line -->
       <p class="clarity">
         Quiet by Fazil creates composed, timeless portraits for founders, professionals, and families who value presence over performance.
       </p>
-
-      <!-- NEW: what-you-get strip -->
       <div class="strip" aria-label="What you get">
         <span>Quiet, guided session</span>
         <span>10–15 final portraits</span>
         <span>Private delivery</span>
       </div>
-
-      <!-- CHANGED: single primary CTA + secondary -->
       <div class="buttons">
         <a class="btn" href="https://YOUR-INSTANT-FORM-LINK" target="_blank" rel="noopener">Request a Session</a>
         <a class="btn" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Message on Instagram</a>
@@ -222,33 +211,27 @@
   </section>
 
   <section class="stories" aria-label="Selected sessions">
-    <!-- NEW: section title + sub -->
     <div style="padding-top:6vh">
       <h2 class="section-title">Selected sessions</h2>
       <p class="section-sub">A few quiet stories — not performances, not poses. Just presence.</p>
     </div>
-
     <div class="grid">
       <article class="card">
         <h3>“I finally recognised myself.”</h3>
         <p>R, a founder, arrived tense. We slowed everything down — window light, a warm table, silence. When he saw the final portrait, he said it felt like “coming back home.”</p>
         <span class="tag">Adelaide · Café window light</span>
       </article>
-
       <article class="card">
         <h3>“Quiet made me powerful.”</h3>
         <p>M wanted something dignified — not staged. With minimal direction and soft shadows, her posture changed. She left saying, “This is how I want to be remembered.”</p>
         <span class="tag">North Terrace · Architectural shade</span>
       </article>
-
       <article class="card">
         <h3>“A memory our son can feel.”</h3>
         <p>Two parents asked for presence, not poses. We crafted a gentle session at golden hour. The image now sits by their entryway — a reminder to slow down.</p>
         <span class="tag">River Torrens · Golden hour</span>
       </article>
     </div>
-
-    <!-- CHANGED: remove extra “Book via Instagram DM” button (keeps one path) -->
     <div style="text-align:center; padding:0 0 7vh">
       <a class="cta-link" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Prefer Instagram? Message quietly.</a>
     </div>
