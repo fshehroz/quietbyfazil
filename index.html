@@ -4,18 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quiet by Fazil — Adelaide</title>
-  <meta name="description" content="Quiet by Fazil — a quiet, invitation-only portrait experience in Adelaide. Luxury through stillness." />
+  <meta name="description" content="Quiet by Fazil — quiet, editorial portraits in Adelaide for people who value presence over performance." />
   <meta name="theme-color" content="#0b0b0c" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0b0c;   /* matte black */
-      --ink:#ede7dc; /* ivory */
-      --muted:#c9c1b3; /* fog */
-      --line:#202123; /* hairline */
-      --espresso:#6b4a33; /* warm accent */
+      --bg:#0b0b0c;
+      --ink:#ede7dc;
+      --muted:#c9c1b3;
+      --line:#202123;
+      --espresso:#6b4a33;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -25,7 +25,6 @@
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Top bar */
     header{
       position:sticky; top:0; z-index:10;
       background:#0b0b0cf2; backdrop-filter:blur(8px) saturate(120%);
@@ -43,6 +42,7 @@
       background:linear-gradient(90deg, transparent 0 6%, var(--espresso) 20% 80%, transparent 94%);
       opacity:.55;
     }
+
     .cta{
       display:inline-flex; align-items:center; gap:.5rem;
       padding:10px 16px; border-radius:999px; text-decoration:none; color:var(--ink);
@@ -52,7 +52,14 @@
     }
     .cta:hover{filter:brightness(1.06)}
 
-    /* HERO — desktop uses wide image; Instagram/mobile uses 4:5 image */
+    /* Secondary link-style CTA (quiet) */
+    .cta-link{
+      color:var(--muted); text-decoration:none; font-size:14px;
+      border-bottom:1px solid rgba(201,193,179,.25);
+      padding-bottom:2px;
+    }
+    .cta-link:hover{color:var(--ink); border-bottom-color:rgba(237,231,220,.45)}
+
     .hero-wrap{
       background:#0b0b0c; border-bottom:1px solid var(--line);
       display:flex; justify-content:center; align-items:center;
@@ -60,7 +67,7 @@
     }
     .hero-bg{
       width:85%;
-      aspect-ratio:21/9; /* desktop/wide look */
+      aspect-ratio:21/9;
       height:auto;
       border-radius:22px; overflow:hidden;
       box-shadow:0 20px 60px rgba(0,0,0,.45);
@@ -70,7 +77,6 @@
     }
     @supports not (aspect-ratio:1/1){ .hero-bg{height:70vh} }
 
-    /* Mobile: switch to Instagram-friendly 4:5 crop (same asset you’ll post) */
     @media (max-width:900px){
       .hero-wrap{padding:4vh 0}
       .hero-bg{
@@ -80,8 +86,6 @@
         background-position:center 45%;
       }
     }
-
-    /* Instagram in-app browser: force 4:5 */
     body.ig .hero-bg{
       width:92vw;
       aspect-ratio:4/5;
@@ -90,7 +94,6 @@
       background-position:center 45%;
     }
 
-    /* Identity */
     .identity{
       padding:7vh 0; text-align:center;
       background:linear-gradient(180deg,#0e0e10,#0b0b0c);
@@ -101,6 +104,29 @@
       font-size:clamp(28px,4.8vw,40px); letter-spacing:.01em; margin:0 0 8px;
     }
     .meta{color:var(--muted); margin:0 0 18px; font-size:14px}
+
+    /* NEW: clarity line + what-you-get strip */
+    .clarity{
+      width:min(820px,92vw);
+      margin:0 auto 16px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+    }
+    .strip{
+      width:min(820px,92vw);
+      margin:0 auto 18px;
+      display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .strip span{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:8px 12px;
+      background:#0f0f12;
+    }
+
     .buttons{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
     .btn{
       padding:12px 18px; border-radius:999px; border:1px solid var(--line);
@@ -121,42 +147,87 @@
     .tag{display:inline-block; margin-top:10px; font-size:12px; color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:6px 10px; background:#111113}
     @media (max-width:900px){.grid{grid-template-columns:1fr 1fr}}
     @media (max-width:560px){.grid{grid-template-columns:1fr}}
+    @media (max-width:560px){ .btn{padding:11px 16px} }
+
+    /* NEW: section heading for selected sessions */
+    .section-title{
+      text-align:center;
+      color:var(--ink);
+      font-family:"Cormorant Garamond", serif;
+      font-weight:500;
+      letter-spacing:.02em;
+      font-size:24px;
+      margin:0 0 10px;
+      opacity:.92;
+    }
+    .section-sub{
+      text-align:center;
+      margin:0 auto 26px;
+      width:min(820px,92vw);
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
 
     footer{border-top:1px solid var(--line); padding:26px 0; color:var(--muted)}
     .foot{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap}
-    @media (max-width:560px){ .btn{padding:11px 16px} }
+    footer a{color:var(--muted)}
+    footer a:hover{color:var(--ink)}
   </style>
 </head>
 <body>
-  <!-- Top bar -->
   <header>
     <div class="container">
       <nav>
         <div class="wordmark"><span class="quiet">Quiet</span><span style="opacity:.66">by</span><span>Fazil</span></div>
-        <a class="cta" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Book via Instagram</a>
+
+        <!-- CHANGED: one primary CTA + one quiet secondary link -->
+        <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:flex-end;">
+          <a class="cta" href="https://YOUR-INSTANT-FORM-LINK" target="_blank" rel="noopener">Request a Session</a>
+          <a class="cta-link" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Message on Instagram</a>
+        </div>
       </nav>
     </div>
   </header>
 
-  <!-- Hero -->
   <section class="hero-wrap">
-    <div class="hero-bg" role="img" aria-label="Quiet by Fazil — a serene storymaking space in Adelaide"></div>
+    <div class="hero-bg" role="img" aria-label="Quiet by Fazil — portrait work in Adelaide"></div>
   </section>
 
-  <!-- Identity -->
   <section class="identity">
     <div class="container">
       <h1 class="tagline">Luxury isn’t loud.</h1>
-      <p class="meta">Quiet by Fazil · Adelaide · By invitation only</p>
+
+      <!-- CHANGED: clear offer + location + softer qualifier -->
+      <p class="meta">Quiet, editorial portraits · Adelaide · Limited sessions each month</p>
+
+      <!-- NEW: clarity line -->
+      <p class="clarity">
+        Quiet by Fazil creates composed, timeless portraits for founders, professionals, and families who value presence over performance.
+      </p>
+
+      <!-- NEW: what-you-get strip -->
+      <div class="strip" aria-label="What you get">
+        <span>Quiet, guided session</span>
+        <span>10–15 final portraits</span>
+        <span>Private delivery</span>
+      </div>
+
+      <!-- CHANGED: single primary CTA + secondary -->
       <div class="buttons">
-        <a class="btn" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Request an Invitation</a>
-        <a class="btn" href="mailto:quietbyfazil@yahoo.com">Email</a>
+        <a class="btn" href="https://YOUR-INSTANT-FORM-LINK" target="_blank" rel="noopener">Request a Session</a>
+        <a class="btn" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Message on Instagram</a>
       </div>
     </div>
   </section>
 
-  <!-- Stories (replace the three cards with your real testimonials) -->
-  <section class="stories" aria-label="Client stories">
+  <section class="stories" aria-label="Selected sessions">
+    <!-- NEW: section title + sub -->
+    <div style="padding-top:6vh">
+      <h2 class="section-title">Selected sessions</h2>
+      <p class="section-sub">A few quiet stories — not performances, not poses. Just presence.</p>
+    </div>
+
     <div class="grid">
       <article class="card">
         <h3>“I finally recognised myself.”</h3>
@@ -176,8 +247,10 @@
         <span class="tag">River Torrens · Golden hour</span>
       </article>
     </div>
+
+    <!-- CHANGED: remove extra “Book via Instagram DM” button (keeps one path) -->
     <div style="text-align:center; padding:0 0 7vh">
-      <a class="btn" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Book via Instagram DM</a>
+      <a class="cta-link" href="https://instagram.com/quietbyfazil" target="_blank" rel="noopener">Prefer Instagram? Message quietly.</a>
     </div>
   </section>
 
@@ -193,7 +266,6 @@
   </footer>
 
   <script>
-    // Instagram in-app browser detection to force the 4:5 hero image
     (function(){
       var ua = navigator.userAgent || navigator.vendor || window.opera;
       if (/Instagram/i.test(ua)) { document.body.classList.add('ig'); }
